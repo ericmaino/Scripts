@@ -42,6 +42,7 @@ function Execute-Script
     
     try
     {
+        # There is likely a better way to do this, but for now this works
         if ($GitUserName -and $GitAccessToken)
         {
             $Secrets += @($GitAccessToken)
@@ -438,6 +439,7 @@ function Throw-OnFailure
 if ($RunTests)
 {
     # Add useful tests here for your repo. These are examples from a previous repo
+    # TODO: Push commits to this repo that demonstrate invalid commits
 
     #Run-Test "Clean FF Merge" { (Get-CommitWithParents -HeadRef a89303f45d0cccb02bda249ca0fbcb5ad6f57bfd -TargetRef 6985f240bfe1ae91e573c5acf320066024e15b70) | Test-GitMerge }
     #Run-Test "Invalid merge" { (Get-CommitWithParents -HeadRef ac0a736281b62c89623d84d0ab41c9aab10a68f0 -TargetRef 3e8ca9043c0ec3a29b86ea35dd9f8ca0a56e3512 ) | Test-GitMerge } -ExpectsFailure
