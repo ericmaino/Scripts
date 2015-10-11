@@ -437,6 +437,8 @@ function Throw-OnFailure
 
 if ($RunTests)
 {
+    # Add useful tests here for your repo. These are examples from a previous repo
+
     #Run-Test "Clean FF Merge" { (Get-CommitWithParents -HeadRef a89303f45d0cccb02bda249ca0fbcb5ad6f57bfd -TargetRef 6985f240bfe1ae91e573c5acf320066024e15b70) | Test-GitMerge }
     #Run-Test "Invalid merge" { (Get-CommitWithParents -HeadRef ac0a736281b62c89623d84d0ab41c9aab10a68f0 -TargetRef 3e8ca9043c0ec3a29b86ea35dd9f8ca0a56e3512 ) | Test-GitMerge } -ExpectsFailure
     #Run-Test "Invalid merge" { (Get-CommitWithParents -HeadRef 11f0ca4539fe76fab1cddf3db544cca72a33ea03 -TargetRef 4d170584624076762dffb95603cb9bf77c0ae2e5 ) | Test-GitMerge } -ExpectsFailure
