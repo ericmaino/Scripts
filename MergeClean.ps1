@@ -1,14 +1,14 @@
 # There are no decorations on the parameters here due to VSO bugs at the moment
 param(
-    $SourceRef,
-    $TargetBranch,
+    $SourceRef = $($Env:BUILD_SOURCEVERSION),
+    $TargetBranch = "master",
     $CommitId = $null,
     $RunTests = $false,
     $PushOnSuccess = $false,
     $DeleteSourceOnSuccess = $false,
     $VerifyCommitDescriptions = $false,
-    $GitUserName = $null,
-    $GitAccessToken = $null
+    $GitUserName = "Unused",
+    $GitAccessToken = $($Env:SYSTEM_ACCESSTOKEN)
 )
 
 # Build.VNext treats all parameters as strings, so we convert them to the types we actually want.
@@ -50,6 +50,12 @@ function Execute-Script
         }
    
         $SourceBranch = Get-NormalizedBranch $SourceRef
+
+        if ($SourceBranch.Length -eq 40)
+        {
+            $CommitId = $SourceBranch
+        }
+
         if ($CommitId)
         {
             Invoke-Git reset --hard $CommitId
