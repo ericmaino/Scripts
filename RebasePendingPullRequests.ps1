@@ -5,8 +5,8 @@
     $GitRepositoryUrl = $env:BUILD_REPOSITORY_URI
 )
 
-Import-Module "$(Join-Path $PSScriptRoot "VisualStudioOnline")"
-Import-Module "$(Join-Path $PSScriptRoot "GitCommon")"
+Import-Module (Join-Path $PSScriptRoot "VisualStudioOnline")
+Import-Module (Join-Path $PSScriptRoot "GitCommon")
 
 try
 {
