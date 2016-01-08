@@ -5,14 +5,13 @@
     $GitRepositoryUrl = $env:BUILD_REPOSITORY_URI
 )
 
-$dir = (Split-Path $MyInvocation.MyCommand.Path)
-Import-Module "$(Join-Path $dir "VisualStudioOnline")"
-Import-Module "$(Join-Path $dir "GitCommon")"
+Import-Module (Join-Path $PSScriptRoot "VisualStudioOnline")
+Import-Module (Join-Path $PSScriptRoot "GitCommon")
 
+Initialize-Git
+$remoteUrl = (Invoke-Git config remote.origin.url -ReturnOutput)
 try
 {
-    Initialize-Git
-    $remoteUrl = (Invoke-Git config remote.origin.url -ReturnOutput)
     Initialize-GitRemoteWithCredentials -GitUserName "Unused" -GitAccessToken $AccessToken -GitRepositoryUrl $GitRepositoryUrl
     
     $AuthHeader = (Get-AuthorizationHeader -AccessToken $AccessToken)
